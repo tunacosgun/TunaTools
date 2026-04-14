@@ -1,0 +1,7 @@
+.env
+build
+node_modules
+package-lock.json
+
+# Auto generated
+src/_includes/styles

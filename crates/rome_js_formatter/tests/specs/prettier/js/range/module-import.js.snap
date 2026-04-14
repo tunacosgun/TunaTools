@@ -1,0 +1,57 @@
+---
+source: crates/rome_formatter_test/src/snapshot_builder.rs
+assertion_line: 212
+info: js/range/module-import.js
+---
+
+# Input
+
+```js
+import  def , {named}  from    'x'
+
+export *  from   'd'
+
+export    const  x
+  =  42
+
+export   default    42
+
+
+```
+
+
+# Prettier differences
+
+```diff
+--- Prettier
++++ Rome
+@@ -1,7 +1,9 @@
+ import def, { named } from "x";
+ 
+-export * from "d";
++export *  from   'd'
++
++export    const  x
++  =  42
+ 
+-export const x = 42;
++export   default    42
+ 
+-export default 42;
+```
+
+# Output
+
+```js
+import def, { named } from "x";
+
+export *  from   'd'
+
+export    const  x
+  =  42
+
+export   default    42
+
+```
+
+

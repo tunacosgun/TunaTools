@@ -1,0 +1,48 @@
+---
+source: crates/rome_formatter_test/src/snapshot_builder.rs
+assertion_line: 212
+info: js/range/class-declaration.js
+---
+
+# Input
+
+```js
+
+
+class    a {
+  b(   ) {}
+}
+
+let    x
+```
+
+
+# Prettier differences
+
+```diff
+--- Prettier
++++ Rome
+@@ -1,5 +1,7 @@
++
++
+ class a {
+   b() {}
+ }
+ 
+-let x;
++let    x
+\ No newline at end of file
+```
+
+# Output
+
+```js
+
+
+class a {
+  b() {}
+}
+
+let    x```
+
+

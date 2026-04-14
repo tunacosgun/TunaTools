@@ -1,0 +1,44 @@
+---
+source: crates/rome_formatter_test/src/snapshot_builder.rs
+assertion_line: 212
+info: js/tuple/tuple-trailing-comma.js
+---
+
+# Input
+
+```js
+#[1,]
+
+```
+
+
+# Prettier differences
+
+```diff
+--- Prettier
++++ Rome
+@@ -1 +1 @@
+-#[1];
++#[1,]
+```
+
+# Output
+
+```js
+#[1,]
+```
+
+# Errors
+```
+tuple-trailing-comma.js:1:1 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × expected `!` following a `#`, but found none
+  
+  > 1 │ #[1,]
+      │ ^
+    2 │ 
+  
+
+```
+
+

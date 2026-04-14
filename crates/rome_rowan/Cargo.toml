@@ -1,0 +1,33 @@
+[package]
+authors              = ["Aleksey Kladov <aleksey.kladov@gmail.com>"]
+description          = "Library for generic lossless syntax trees"
+documentation        = "https://rustdocs.rome.tools/rome_rowan/index.html"
+edition.workspace    = true
+license              = "MIT OR Apache-2.0"
+name                 = "rome_rowan"
+repository.workspace = true
+version              = "0.0.1"
+
+[dependencies]
+countme        = { workspace = true }
+hashbrown      = { version = "0.12.3", features = ["inline-more"], default-features = false }
+memoffset      = "0.8.0"
+rome_text_edit = { workspace = true }
+rome_text_size = { workspace = true }
+rustc-hash     = { workspace = true }
+schemars       = { workspace = true, optional = true }
+serde          = { workspace = true, optional = true, default-features = false }
+tracing        = { workspace = true }
+
+[dev-dependencies]
+iai               = "0.1.1"
+quickcheck        = { workspace = true }
+quickcheck_macros = { workspace = true }
+serde_json        = { workspace = true }
+
+[features]
+serde = ["dep:serde", "schemars", "rome_text_size/serde"]
+
+[[bench]]
+harness = false
+name    = "mutation"

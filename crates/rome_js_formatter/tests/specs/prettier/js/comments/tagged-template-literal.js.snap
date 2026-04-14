@@ -1,0 +1,66 @@
+---
+source: crates/rome_formatter_test/src/snapshot_builder.rs
+assertion_line: 212
+info: js/comments/tagged-template-literal.js
+---
+
+# Input
+
+```js
+foo``; // comment
+
+foo // comment
+``;
+
+foo // comment
+`
+`;
+
+foo /* comment */`
+`;
+
+foo /* comment */
+`
+`;
+
+```
+
+
+# Prettier differences
+
+```diff
+--- Prettier
++++ Rome
+@@ -7,8 +7,8 @@
+ `
+ `;
+ 
+-foo/* comment */ `
++foo /* comment */`
+ `;
+ 
+-foo/* comment */ `
++foo /* comment */`
+ `;
+```
+
+# Output
+
+```js
+foo``; // comment
+
+foo // comment
+``;
+
+foo // comment
+`
+`;
+
+foo /* comment */`
+`;
+
+foo /* comment */`
+`;
+```
+
+
