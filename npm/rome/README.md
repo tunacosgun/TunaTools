@@ -36,3 +36,9 @@ TunaTools is [MIT licensed](https://github.com/tunahan/tunatools/tree/main/LICEN
 
 *Originally based on the Rome/Biome codebase, now maintained as part of the Tunasoft ecosystem.*
 
+
+
+## Contributors
+
+- Tunahan Coşgun — <info@tunahancosgun.dev>
+- Duygu Durmuş — <duygudurmus12@gmail.com>
