@@ -1,0 +1,16 @@
+[package]
+edition = "2021"
+name    = "tuna_migrate"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+lazy_static      = { workspace = true }
+tuna_analyze     = { workspace = true }
+tuna_diagnostics = { workspace = true }
+tuna_json_syntax = { workspace = true }
+tuna_rowan       = { workspace = true }
+
+[dev-dependencies]
+tuna_json_parser = { workspace = true }

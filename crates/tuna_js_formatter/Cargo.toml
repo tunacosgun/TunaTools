@@ -1,0 +1,54 @@
+[package]
+authors.workspace    = true
+categories           = ["development-tools"]
+description          = "Rome's JavaScript formatter"
+documentation        = "https://rustdocs.rome.tools/tuna_js_formatter/index.html"
+edition.workspace    = true
+license.workspace    = true
+name                 = "tuna_js_formatter"
+repository.workspace = true
+version              = "0.0.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cfg-if                      = "1.0.0"
+tuna_deserialize            = { workspace = true }
+tuna_diagnostics_categories = { workspace = true }
+tuna_formatter              = { workspace = true }
+tuna_js_factory             = { workspace = true }
+tuna_js_syntax              = { workspace = true }
+tuna_json_syntax            = { workspace = true }
+tuna_rowan                  = { workspace = true }
+tuna_text_size              = { workspace = true }
+schemars                    = { workspace = true, optional = true }
+serde                       = { workspace = true, features = ["derive"], optional = true }
+tracing                     = { workspace = true }
+unicode-width               = "0.1.9"
+
+[dev-dependencies]
+countme             = { workspace = true, features = ["enable"] }
+iai                 = "0.1.1"
+insta               = { workspace = true, features = ["glob"] }
+quickcheck          = { workspace = true }
+quickcheck_macros   = { workspace = true }
+tuna_diagnostics    = { workspace = true }
+tuna_formatter_test = { workspace = true }
+tuna_fs             = { workspace = true }
+tuna_js_factory     = { workspace = true }
+tuna_js_parser      = { workspace = true }
+tuna_parser         = { workspace = true }
+serde               = { version = "1", features = ["derive"] }
+serde_json          = { workspace = true }
+tests_macros        = { workspace = true }
+
+[[bench]]
+harness = false
+name    = "iai"
+
+[features]
+serde = ["dep:serde", "schemars"]
+
+# cargo-workspaces metadata
+[package.metadata.workspaces]
+independent = true

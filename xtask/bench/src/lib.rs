@@ -8,7 +8,7 @@ use std::str::FromStr;
 use std::time::Duration;
 
 use criterion::{BatchSize, BenchmarkId};
-use rome_rowan::NodeCache;
+use tuna_rowan::NodeCache;
 
 pub use crate::features::analyzer::benchmark_analyze_lib;
 use crate::features::analyzer::AnalyzerMeasurement;

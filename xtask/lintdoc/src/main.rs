@@ -1,20 +1,20 @@
 use pulldown_cmark::{html::write_html, CodeBlockKind, Event, LinkType, Parser, Tag};
-use rome_analyze::{
+use tuna_analyze::{
     AnalysisFilter, AnalyzerOptions, ControlFlow, GroupCategory, Queryable, RegistryVisitor, Rule,
     RuleCategory, RuleFilter, RuleGroup, RuleMetadata,
 };
-use rome_console::fmt::Termcolor;
-use rome_console::{
+use tuna_console::fmt::Termcolor;
+use tuna_console::{
     fmt::{Formatter, HTML},
     markup, Console, Markup, MarkupBuf,
 };
-use rome_diagnostics::termcolor::NoColor;
-use rome_diagnostics::{Diagnostic, DiagnosticExt, PrintDiagnostic};
-use rome_js_parser::JsParserOptions;
-use rome_js_syntax::{JsFileSource, JsLanguage, Language, LanguageVariant, ModuleKind};
-use rome_json_parser::JsonParserOptions;
-use rome_json_syntax::JsonLanguage;
-use rome_service::settings::WorkspaceSettings;
+use tuna_diagnostics::termcolor::NoColor;
+use tuna_diagnostics::{Diagnostic, DiagnosticExt, PrintDiagnostic};
+use tuna_js_parser::JsParserOptions;
+use tuna_js_syntax::{JsFileSource, JsLanguage, Language, LanguageVariant, ModuleKind};
+use tuna_json_parser::JsonParserOptions;
+use tuna_json_syntax::JsonLanguage;
+use tuna_service::settings::WorkspaceSettings;
 use std::{
     collections::BTreeMap,
     fmt::Write as _,
@@ -113,8 +113,8 @@ fn main() -> Result<()> {
     }
 
     let mut visitor = LintRulesVisitor::default();
-    rome_js_analyze::visit_registry(&mut visitor);
-    rome_json_analyze::visit_registry(&mut visitor);
+    tuna_js_analyze::visit_registry(&mut visitor);
+    tuna_json_analyze::visit_registry(&mut visitor);
 
     let LintRulesVisitor {
         mut groups,
@@ -522,7 +522,7 @@ fn assert_lint(
 
     let mut all_diagnostics = vec![];
 
-    let mut write_diagnostic = |code: &str, diag: rome_diagnostics::Error| {
+    let mut write_diagnostic = |code: &str, diag: tuna_diagnostics::Error| {
         let category = diag.category().map_or("", |code| code.name());
 
         Formatter::new(&mut write).write_markup(markup! {
@@ -534,10 +534,10 @@ fn assert_lint(
         if test.expect_diagnostic {
             // Print all diagnostics to help the user
             if all_diagnostics.len() > 1 {
-                let mut console = rome_console::EnvConsole::default();
+                let mut console = tuna_console::EnvConsole::default();
                 for diag in all_diagnostics.iter() {
                     console.println(
-                        rome_console::LogLevel::Error,
+                        tuna_console::LogLevel::Error,
                         markup! {
                             {PrintDiagnostic::verbose(diag)}
                         },
@@ -552,10 +552,10 @@ fn assert_lint(
             );
         } else {
             // Print all diagnostics to help the user
-            let mut console = rome_console::EnvConsole::default();
+            let mut console = tuna_console::EnvConsole::default();
             for diag in all_diagnostics.iter() {
                 console.println(
-                    rome_console::LogLevel::Error,
+                    tuna_console::LogLevel::Error,
                     markup! {
                         {PrintDiagnostic::verbose(diag)}
                     },
@@ -576,7 +576,7 @@ fn assert_lint(
     }
     match test.block_type {
         BlockType::Js(source_type) => {
-            let parse = rome_js_parser::parse(code, source_type, JsParserOptions::default());
+            let parse = tuna_js_parser::parse(code, source_type, JsParserOptions::default());
 
             if parse.has_errors() {
                 for diag in parse.into_diagnostics() {
@@ -597,7 +597,7 @@ fn assert_lint(
                 };
 
                 let options = AnalyzerOptions::default();
-                let (_, diagnostics) = rome_js_analyze::analyze(
+                let (_, diagnostics) = tuna_js_analyze::analyze(
                     &root,
                     filter,
                     &options,
@@ -647,7 +647,7 @@ fn assert_lint(
             }
         }
         BlockType::Json => {
-            let parse = rome_json_parser::parse_json(code, JsonParserOptions::default());
+            let parse = tuna_json_parser::parse_json(code, JsonParserOptions::default());
 
             if parse.has_errors() {
                 for diag in parse.into_diagnostics() {
@@ -668,7 +668,7 @@ fn assert_lint(
                 };
 
                 let options = AnalyzerOptions::default();
-                let (_, diagnostics) = rome_json_analyze::analyze(
+                let (_, diagnostics) = tuna_json_analyze::analyze(
                     &root.value().unwrap(),
                     filter,
                     &options,

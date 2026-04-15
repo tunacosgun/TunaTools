@@ -135,25 +135,25 @@ impl LanguageKind {
 
     pub fn formatter_crate_name(&self) -> &'static str {
         match self {
-            LanguageKind::Js => "rome_js_formatter",
-            LanguageKind::Css => "rome_css_formatter",
-            LanguageKind::Json => "rome_json_formatter",
+            LanguageKind::Js => "tuna_js_formatter",
+            LanguageKind::Css => "tuna_css_formatter",
+            LanguageKind::Json => "tuna_json_formatter",
         }
     }
 
     pub fn syntax_crate_name(&self) -> &'static str {
         match self {
-            LanguageKind::Js => "rome_js_syntax",
-            LanguageKind::Css => "rome_css_syntax",
-            LanguageKind::Json => "rome_json_syntax",
+            LanguageKind::Js => "tuna_js_syntax",
+            LanguageKind::Css => "tuna_css_syntax",
+            LanguageKind::Json => "tuna_json_syntax",
         }
     }
 
     pub fn factory_crate_name(&self) -> &'static str {
         match self {
-            LanguageKind::Js => "rome_js_factory",
-            LanguageKind::Css => "rome_css_factory",
-            LanguageKind::Json => "rome_json_factory",
+            LanguageKind::Js => "tuna_js_factory",
+            LanguageKind::Css => "tuna_css_factory",
+            LanguageKind::Json => "tuna_json_factory",
         }
     }
 }

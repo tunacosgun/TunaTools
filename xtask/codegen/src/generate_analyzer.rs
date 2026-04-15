@@ -14,7 +14,7 @@ pub fn generate_analyzer() -> Result<()> {
 }
 
 fn generate_js_analyzer() -> Result<()> {
-    let base_path = project_root().join("crates/rome_js_analyze/src");
+    let base_path = project_root().join("crates/tuna_js_analyze/src");
     let mut analyzers = BTreeMap::new();
     generate_category("analyzers", &mut analyzers, base_path.clone())?;
 
@@ -48,7 +48,7 @@ fn generate_json_analyzer() -> Result<()> {
     generate_category(
         "analyzers",
         &mut analyzers,
-        project_root().join("crates/rome_json_analyze/src"),
+        project_root().join("crates/tuna_json_analyze/src"),
     )?;
 
     update_json_registry_builder(analyzers)
@@ -116,7 +116,7 @@ fn generate_category(
     let (modules, paths): (Vec<_>, Vec<_>) = groups.into_values().unzip();
     let tokens = xtask::reformat(quote! {
         #( #modules )*
-        ::rome_analyze::declare_category! {
+        ::tuna_analyze::declare_category! {
             pub(crate) #category_name {
                 kind: #kind,
                 groups: [
@@ -170,7 +170,7 @@ fn generate_group(category: &'static str, group: &str, base_path: PathBuf) -> Re
     let sp = Punct::new(' ', Spacing::Joint);
     let sp4 = quote! { #sp #sp #sp #sp };
     let tokens = xtask::reformat(quote! {
-        use rome_analyze::declare_group;
+        use tuna_analyze::declare_group;
         #nl #nl
         #( #rule_imports )*
         #nl #nl
@@ -216,7 +216,7 @@ fn update_js_registry_builder(
     assists: BTreeMap<&'static str, TokenStream>,
     syntax: BTreeMap<&'static str, TokenStream>,
 ) -> Result<()> {
-    let path = project_root().join("crates/rome_js_analyze/src/registry.rs");
+    let path = project_root().join("crates/tuna_js_analyze/src/registry.rs");
 
     let categories = analyzers
         .into_iter()
@@ -227,8 +227,8 @@ fn update_js_registry_builder(
         .map(|(_, tokens)| tokens);
 
     let tokens = xtask::reformat(quote! {
-        use rome_analyze::RegistryVisitor;
-        use rome_js_syntax::JsLanguage;
+        use tuna_analyze::RegistryVisitor;
+        use tuna_js_syntax::JsLanguage;
 
         pub fn visit_registry<V: RegistryVisitor<JsLanguage>>(registry: &mut V) {
             #( #categories )*
@@ -241,13 +241,13 @@ fn update_js_registry_builder(
 }
 
 fn update_json_registry_builder(analyzers: BTreeMap<&'static str, TokenStream>) -> Result<()> {
-    let path = project_root().join("crates/rome_json_analyze/src/registry.rs");
+    let path = project_root().join("crates/tuna_json_analyze/src/registry.rs");
 
     let categories = analyzers.into_values();
 
     let tokens = xtask::reformat(quote! {
-        use rome_analyze::RegistryVisitor;
-        use rome_json_syntax::JsonLanguage;
+        use tuna_analyze::RegistryVisitor;
+        use tuna_json_syntax::JsonLanguage;
 
         pub fn visit_registry<V: RegistryVisitor<JsonLanguage>>(registry: &mut V) {
             #( #categories )*

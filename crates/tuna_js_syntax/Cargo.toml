@@ -1,0 +1,22 @@
+[package]
+authors.workspace    = true
+description          = "SyntaxKind and common rowan definitions for tuna_js_parser"
+documentation        = "https://rustdocs.rome.tools/tuna_js_syntax/index.html"
+edition.workspace    = true
+license.workspace    = true
+name                 = "tuna_js_syntax"
+repository.workspace = true
+version              = "0.0.2"
+
+[dependencies]
+tuna_console     = { version = "0.0.1", path = "../tuna_console" }
+tuna_diagnostics = { version = "0.0.1", path = "../tuna_diagnostics" }
+tuna_rowan       = { version = "0.0.1", path = "../tuna_rowan" }
+schemars         = { version = "0.8.10", optional = true }
+serde            = { version = "1.0.136", features = ["derive"], optional = true }
+
+[dev-dependencies]
+tuna_js_factory = { path = "../tuna_js_factory" }
+
+[features]
+serde = ["dep:serde", "schemars", "tuna_rowan/serde"]

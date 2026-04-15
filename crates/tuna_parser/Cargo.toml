@@ -1,0 +1,16 @@
+[package]
+authors.workspace    = true
+description          = "Shared infrastructure for Rome's parser"
+documentation        = "https://rustdocs.rome.tools/tuna_parser/index.html"
+edition.workspace    = true
+license.workspace    = true
+name                 = "tuna_parser"
+repository.workspace = true
+version              = "0.0.1"
+
+
+[dependencies]
+drop_bomb        = "0.1.5"
+tuna_console     = { workspace = true }
+tuna_diagnostics = { workspace = true }
+tuna_rowan       = { workspace = true }

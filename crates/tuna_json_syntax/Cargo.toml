@@ -1,0 +1,14 @@
+[package]
+authors.workspace    = true
+description          = "SyntaxKind and common rowan definitions for tuna_json_parser"
+documentation        = "https://rustdocs.rome.tools/tuna_json_parser/index.html"
+edition.workspace    = true
+license.workspace    = true
+name                 = "tuna_json_syntax"
+repository.workspace = true
+version              = "0.0.1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tuna_rowan = { workspace = true }

@@ -1,0 +1,31 @@
+[package]
+authors.workspace    = true
+categories           = ["parser-implementations", "development-tools"]
+description          = "An extremely fast JSON parser"
+documentation        = "https://rustdocs.rome.tools/tuna_json_parser/index.html"
+edition.workspace    = true
+homepage.workspace   = true
+license.workspace    = true
+name                 = "tuna_json_parser"
+repository.workspace = true
+version              = "0.0.1"
+
+[dependencies]
+tuna_console          = { workspace = true }
+tuna_diagnostics      = { workspace = true }
+tuna_js_unicode_table = { workspace = true }
+tuna_json_factory     = { workspace = true }
+tuna_json_syntax      = { workspace = true }
+tuna_parser           = { workspace = true }
+tuna_rowan            = { workspace = true }
+tracing               = { workspace = true }
+
+[dev-dependencies]
+insta             = { workspace = true }
+quickcheck        = { workspace = true }
+quickcheck_macros = { workspace = true }
+tests_macros      = { workspace = true }
+
+# cargo-workspaces metadata
+[package.metadata.workspaces]
+independent = true

@@ -18,12 +18,12 @@ pub fn generate_new_lintrule(path: &str, rule_name: &str) {
     // Generate rule code
     let code = format!(
         r#"use crate::semantic_services::Semantic;
-use rome_analyze::{{
+use tuna_analyze::{{
     context::RuleContext, declare_rule, Rule, RuleDiagnostic,
 }};
-use rome_console::markup;
-use rome_js_semantic::{{Reference, ReferencesExtensions}};
-use rome_js_syntax::JsIdentifierBinding;
+use tuna_console::markup;
+use tuna_js_semantic::{{Reference, ReferencesExtensions}};
+use tuna_js_syntax::JsIdentifierBinding;
 
 declare_rule! {{
     /// Succinct description of the rule.
@@ -91,7 +91,7 @@ impl Rule for {rule_name_upper_camel} {{
     let file_name = format!("{path}/{rule_name_snake}.rs");
     std::fs::write(file_name, code).unwrap();
 
-    let categories_path = "crates/rome_diagnostics_categories/src/categories.rs";
+    let categories_path = "crates/tuna_diagnostics_categories/src/categories.rs";
     let categories = std::fs::read_to_string(categories_path).unwrap();
 
     if !categories.contains(&rule_name_lower_camel) {
@@ -120,11 +120,11 @@ impl Rule for {rule_name_upper_camel} {{
     }
 
     // Generate test code
-    let tests_path = format!("crates/rome_js_analyze/tests/specs/nursery/{rule_name_lower_camel}");
+    let tests_path = format!("crates/tuna_js_analyze/tests/specs/nursery/{rule_name_lower_camel}");
     let _ = std::fs::create_dir_all(tests_path);
 
     let test_file =
-        format!("crates/rome_js_analyze/tests/specs/nursery/{rule_name_lower_camel}/valid.js");
+        format!("crates/tuna_js_analyze/tests/specs/nursery/{rule_name_lower_camel}/valid.js");
     if std::fs::File::open(&test_file).is_err() {
         let _ = std::fs::write(
             test_file,
@@ -133,7 +133,7 @@ impl Rule for {rule_name_upper_camel} {{
     }
 
     let test_file =
-        format!("crates/rome_js_analyze/tests/specs/nursery/{rule_name_lower_camel}/invalid.js");
+        format!("crates/tuna_js_analyze/tests/specs/nursery/{rule_name_lower_camel}/invalid.js");
     if std::fs::File::open(&test_file).is_err() {
         let _ = std::fs::write(test_file, "\n\n var a = 1;\na = 2;\n a = 3;");
     }

@@ -3,9 +3,9 @@ use crate::runner::{
     create_bogus_node_in_tree_diagnostic, TestCase, TestCaseFiles, TestRunOutcome, TestSuite,
 };
 use regex::Regex;
-use rome_js_parser::JsParserOptions;
-use rome_js_syntax::{JsFileSource, ModuleKind};
-use rome_rowan::{AstNode, SyntaxKind};
+use tuna_js_parser::JsParserOptions;
+use tuna_js_syntax::{JsFileSource, ModuleKind};
+use tuna_rowan::{AstNode, SyntaxKind};
 use std::convert::TryFrom;
 use std::fmt::Write;
 use std::path::Path;

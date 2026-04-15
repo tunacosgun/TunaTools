@@ -1,0 +1,36 @@
+[package]
+authors.workspace    = true
+categories           = ["development-tools"]
+description          = "Rome's JSON formatter"
+documentation        = "https://rustdocs.rome.tools/tuna_js_formatter/index.html"
+edition.workspace    = true
+homepage.workspace   = true
+license.workspace    = true
+name                 = "tuna_json_formatter"
+repository.workspace = true
+version              = "0.0.1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tuna_diagnostics = { workspace = true }
+tuna_formatter   = { workspace = true }
+tuna_json_syntax = { workspace = true }
+tuna_rowan       = { workspace = true }
+tuna_suppression = { workspace = true }
+
+[dev-dependencies]
+countme             = { workspace = true, features = ["enable"] }
+insta               = { workspace = true, features = ["glob"] }
+tuna_formatter_test = { workspace = true }
+tuna_fs             = { workspace = true }
+tuna_json_factory   = { workspace = true }
+tuna_json_parser    = { workspace = true }
+tuna_parser         = { workspace = true }
+serde               = { version = "1", features = ["derive"] }
+serde_json          = { workspace = true }
+tests_macros        = { workspace = true }
+
+# cargo-workspaces metadata
+[package.metadata.workspaces]
+independent = true

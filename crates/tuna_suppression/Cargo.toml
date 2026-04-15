@@ -1,0 +1,14 @@
+[package]
+authors     = { workspace = true }
+description = "Rome suppression utilities"
+edition     = { workspace = true }
+license     = { workspace = true }
+name        = "tuna_suppression"
+repository  = { workspace = true }
+version     = "0.0.1"
+
+
+[dependencies]
+tuna_console     = { workspace = true }
+tuna_diagnostics = { workspace = true }
+tuna_rowan       = { workspace = true }

@@ -1,6 +1,6 @@
-use rome_js_factory::make;
-use rome_js_formatter::{context::JsFormatOptions, format_node};
-use rome_js_syntax::{
+use tuna_js_factory::make;
+use tuna_js_formatter::{context::JsFormatOptions, format_node};
+use tuna_js_syntax::{
     AnyJsBinding, AnyJsBindingPattern, AnyJsCallArgument, AnyJsDeclaration, AnyJsDeclarationClause,
     AnyJsExportClause, AnyJsExpression, AnyJsFormalParameter, AnyJsImportClause,
     AnyJsLiteralExpression, AnyJsModuleItem, AnyJsName, AnyJsNamedImport,
@@ -8,8 +8,8 @@ use rome_js_syntax::{
     AnyJsStatement, AnyTsName, AnyTsReturnType, AnyTsType, AnyTsTypeMember, JsFileSource,
     TriviaPieceKind, T,
 };
-use rome_rowan::AstNode;
-use rome_service::workspace_types::{generate_type, methods, ModuleQueue};
+use tuna_rowan::AstNode;
+use tuna_service::workspace_types::{generate_type, methods, ModuleQueue};
 use xtask::{project_root, Mode, Result};
 use xtask_codegen::{to_camel_case, update};
 

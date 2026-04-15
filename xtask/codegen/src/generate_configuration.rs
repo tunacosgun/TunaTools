@@ -2,20 +2,20 @@ use case::CaseExt;
 use proc_macro2::{Ident, Literal, Span, TokenStream};
 use pulldown_cmark::{Event, Parser, Tag};
 use quote::quote;
-use rome_analyze::{
+use tuna_analyze::{
     GroupCategory, Queryable, RegistryVisitor, Rule, RuleCategory, RuleGroup, RuleMetadata,
 };
-use rome_js_syntax::JsLanguage;
-use rome_json_syntax::JsonLanguage;
+use tuna_js_syntax::JsLanguage;
+use tuna_json_syntax::JsonLanguage;
 use std::collections::BTreeMap;
 use xtask::*;
 use xtask_codegen::{to_lower_snake_case, update};
 
 pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
-    let config_root = project_root().join("crates/rome_service/src/configuration/linter");
+    let config_root = project_root().join("crates/tuna_service/src/configuration/linter");
     let config_parsing_root =
-        project_root().join("crates/rome_service/src/configuration/parse/json/");
-    let push_rules_directory = project_root().join("crates/rome_service/src/configuration");
+        project_root().join("crates/tuna_service/src/configuration/parse/json/");
+    let push_rules_directory = project_root().join("crates/tuna_service/src/configuration");
 
     #[derive(Default)]
     struct LintRulesVisitor {
@@ -63,8 +63,8 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
     }
 
     let mut visitor = LintRulesVisitor::default();
-    rome_js_analyze::visit_registry(&mut visitor);
-    rome_json_analyze::visit_registry(&mut visitor);
+    tuna_js_analyze::visit_registry(&mut visitor);
+    tuna_json_analyze::visit_registry(&mut visitor);
 
     let LintRulesVisitor { groups } = visitor;
 
@@ -97,7 +97,7 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
         });
 
         let global_recommended = if group == "nursery" {
-            quote! { self.is_recommended() && rome_flags::is_unstable() }
+            quote! { self.is_recommended() && tuna_flags::is_unstable() }
         } else {
             quote! { self.is_recommended() }
         };
@@ -154,10 +154,10 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
         #[cfg(feature = "schema")]
         use schemars::JsonSchema;
         use crate::RuleConfiguration;
-        use rome_analyze::RuleFilter;
+        use tuna_analyze::RuleFilter;
         use indexmap::IndexSet;
         use bpaf::Bpaf;
-        use rome_diagnostics::{Category, Severity};
+        use tuna_diagnostics::{Category, Severity};
 
         #[derive(Deserialize, Serialize, Debug, Clone, Bpaf)]
         #[cfg_attr(feature = "schema", derive(JsonSchema))]
@@ -187,7 +187,7 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
         }
         impl Rules {
 
-            /// Checks if the code coming from [rome_diagnostics::Diagnostic] corresponds to a rule.
+            /// Checks if the code coming from [tuna_diagnostics::Diagnostic] corresponds to a rule.
             /// Usually the code is built like {category}/{rule_name}
             pub fn matches_diagnostic_code<'a>(
                 &self,
@@ -204,8 +204,8 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
                 }
             }
 
-            /// Given a category coming from [Diagnostic](rome_diagnostics::Diagnostic), this function returns
-            /// the [Severity](rome_diagnostics::Severity) associated to the rule, if the configuration changed it.
+            /// Given a category coming from [Diagnostic](tuna_diagnostics::Diagnostic), this function returns
+            /// the [Severity](tuna_diagnostics::Severity) associated to the rule, if the configuration changed it.
             ///
             /// If not, the function returns [None].
             pub fn get_severity_from_code(&self, category: &Category) -> Option<Severity> {
@@ -265,10 +265,10 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
     let visitors = quote! {
         use crate::configuration::linter::*;
         use crate::Rules;
-        use rome_deserialize::json::{has_only_known_keys, VisitJsonNode};
-        use rome_deserialize::{DeserializationDiagnostic, VisitNode};
-        use rome_json_syntax::{AnyJsonValue, JsonLanguage};
-        use rome_rowan::{AstNode, SyntaxNode};
+        use tuna_deserialize::json::{has_only_known_keys, VisitJsonNode};
+        use tuna_deserialize::{DeserializationDiagnostic, VisitNode};
+        use tuna_json_syntax::{AnyJsonValue, JsonLanguage};
+        use tuna_rowan::{AstNode, SyntaxNode};
         use crate::configuration::parse::json::linter::are_recommended_and_all_correct;
 
         impl VisitJsonNode for Rules {}
@@ -315,7 +315,7 @@ pub(crate) fn generate_rules_configuration(mode: Mode) -> Result<()> {
     let push_rules = quote! {
         use crate::configuration::linter::*;
         use crate::{RuleConfiguration, Rules};
-        use rome_analyze::{AnalyzerRules, MetadataRegistry};
+        use tuna_analyze::{AnalyzerRules, MetadataRegistry};
 
         pub(crate) fn push_to_analyzer_rules(
             rules: &Rules,

@@ -362,7 +362,7 @@ fn generate_formatter(repo: &GitRepo, language_kind: LanguageKind) {
                 quote! {
                     use crate::prelude::*;
 
-                    use rome_rowan::AstNode;
+                    use tuna_rowan::AstNode;
                     use #syntax_crate_ident::#node_id;
 
                     #[derive(Debug, Clone, Default)]
@@ -505,7 +505,7 @@ impl BoilerplateImpls {
         let formatter_context_ident = self.language.format_context_ident();
 
         let tokens = quote! {
-            use rome_formatter::{FormatRefWithRule, FormatOwnedWithRule, FormatRule, FormatResult};
+            use tuna_formatter::{FormatRefWithRule, FormatOwnedWithRule, FormatRule, FormatResult};
             use crate::{AsFormat, IntoFormat, FormatNodeRule, FormatBogusNodeRule, #formatter_ident, #formatter_context_ident};
 
             #( #impls )*

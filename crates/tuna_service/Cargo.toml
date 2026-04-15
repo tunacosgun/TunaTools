@@ -1,0 +1,51 @@
+[package]
+authors.workspace    = true
+edition.workspace    = true
+license.workspace    = true
+name                 = "tuna_service"
+repository.workspace = true
+version              = "0.0.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bpaf                = { workspace = true }
+dashmap             = { workspace = true }
+indexmap            = { workspace = true, features = ["serde"] }
+tuna_analyze        = { workspace = true, features = ["serde"] }
+tuna_console        = { workspace = true }
+tuna_deserialize    = { workspace = true }
+tuna_diagnostics    = { workspace = true }
+tuna_flags          = { workspace = true }
+tuna_formatter      = { workspace = true, features = ["serde"] }
+tuna_fs             = { workspace = true, features = ["serde"] }
+tuna_js_analyze     = { workspace = true }
+tuna_js_factory     = { workspace = true, optional = true }
+tuna_js_formatter   = { workspace = true, features = ["serde"] }
+tuna_js_parser      = { workspace = true }
+tuna_js_semantic    = { workspace = true }
+tuna_js_syntax      = { workspace = true, features = ["serde"] }
+tuna_json_analyze   = { workspace = true }
+tuna_json_formatter = { workspace = true }
+tuna_json_parser    = { workspace = true }
+tuna_json_syntax    = { workspace = true }
+tuna_parser         = { workspace = true }
+tuna_rowan          = { workspace = true, features = ["serde"] }
+tuna_text_edit      = { workspace = true }
+schemars            = { workspace = true, features = ["indexmap1"], optional = true }
+serde               = { workspace = true, features = ["derive"] }
+serde_json          = { workspace = true, features = ["raw_value"] }
+tracing             = { workspace = true, features = ["attributes"] }
+
+[features]
+schema = [
+  "dep:schemars",
+  "tuna_js_analyze/schema",
+  "tuna_formatter/serde",
+  "tuna_js_factory",
+  "tuna_text_edit/schemars",
+]
+
+[dev-dependencies]
+insta        = { workspace = true }
+tests_macros = { workspace = true }

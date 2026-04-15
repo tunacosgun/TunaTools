@@ -1,5 +1,5 @@
-use rome_cli::rome_command;
-use rome_service::VERSION;
+use tuna_cli::tuna_command;
+use tuna_service::VERSION;
 use std::fs;
 use xtask::{project_root, Result};
 
@@ -44,7 +44,7 @@ pub(crate) fn generate_files() -> Result<()> {
     fs::write(project_root().join("website/src/pages/vscode.mdx"), page)?;
 
     if VERSION != "0.0.0" {
-        let parser = rome_command();
+        let parser = tuna_command();
         let markdown = parser.render_markdown("rome");
         fs::write(
             project_root().join("website/src/pages/cli.mdx"),

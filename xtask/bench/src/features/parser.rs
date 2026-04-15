@@ -4,12 +4,12 @@ use crate::language::Parse;
 use crate::test_case::TestCase;
 use crate::BenchmarkSummary;
 use itertools::Itertools;
-use rome_diagnostics::console::fmt::Termcolor;
-use rome_diagnostics::console::markup;
-use rome_diagnostics::termcolor::Buffer;
-use rome_diagnostics::DiagnosticExt;
-use rome_diagnostics::PrintDiagnostic;
-use rome_parser::diagnostic::ParseDiagnostic;
+use tuna_diagnostics::console::fmt::Termcolor;
+use tuna_diagnostics::console::markup;
+use tuna_diagnostics::termcolor::Buffer;
+use tuna_diagnostics::DiagnosticExt;
+use tuna_diagnostics::PrintDiagnostic;
+use tuna_parser::diagnostic::ParseDiagnostic;
 use std::fmt::{Display, Formatter};
 use std::time::Duration;
 
@@ -59,7 +59,7 @@ impl Display for ParseMeasurement {
         let diagnostics = &self
             .diagnostics
             .iter()
-            .map(|diagnostic| rome_diagnostics::Error::from(diagnostic.clone()))
+            .map(|diagnostic| tuna_diagnostics::Error::from(diagnostic.clone()))
             .group_by(|x| x.severity());
         for (severity, items) in diagnostics {
             let _ = writeln!(f, "\t\t{:?}: {}", severity, items.count());
@@ -72,7 +72,7 @@ impl Display for ParseMeasurement {
                 .clone()
                 .with_file_path(self.id.to_string())
                 .with_file_source_code(self.code.clone());
-            rome_diagnostics::console::fmt::Formatter::new(&mut Termcolor(&mut buffer))
+            tuna_diagnostics::console::fmt::Formatter::new(&mut Termcolor(&mut buffer))
                 .write_markup(markup! {
                     {PrintDiagnostic::verbose(&error)}
                 })

@@ -1,0 +1,24 @@
+[package]
+edition = "2021"
+name    = "tuna_test_utils"
+publish = false
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+countme          = { workspace = true, features = ["enable"] }
+json_comments    = "0.2.1"
+tuna_analyze     = { workspace = true }
+tuna_console     = { workspace = true }
+tuna_deserialize = { workspace = true }
+tuna_diagnostics = { workspace = true }
+tuna_js_parser   = { workspace = true }
+tuna_js_syntax   = { workspace = true }
+tuna_json_parser = { workspace = true }
+tuna_json_syntax = { workspace = true }
+tuna_rowan       = { workspace = true }
+tuna_service     = { workspace = true }
+serde            = { workspace = true }
+serde_json       = { workspace = true }
+similar          = { version = "2.2.1" }

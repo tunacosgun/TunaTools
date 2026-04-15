@@ -16,9 +16,9 @@ const KNOWN_GROUPS: [&str; 7] = [
 ];
 
 const KNOWN_PATHS: [&str; 3] = [
-    "crates/rome_js_analyze/src/analyzers",
-    "crates/rome_js_analyze/src/semantic_analyzers",
-    "crates/rome_js_analyze/src/aria_analyzers",
+    "crates/tuna_js_analyze/src/analyzers",
+    "crates/tuna_js_analyze/src/semantic_analyzers",
+    "crates/tuna_js_analyze/src/aria_analyzers",
 ];
 pub fn promote_rule(rule_name: &str, new_group: &str) {
     let current_dir = env::current_dir().ok().unwrap();
@@ -53,7 +53,7 @@ pub fn promote_rule(rule_name: &str, new_group: &str) {
         let new_group_path = analyzers_path.join(new_group);
         let new_rule_path = new_group_path.join(format!("{}.rs", rule_name_snake));
 
-        let categories_path = "crates/rome_diagnostics_categories/src/categories.rs";
+        let categories_path = "crates/tuna_diagnostics_categories/src/categories.rs";
         let categories = std::fs::read_to_string(categories_path).unwrap();
 
         let categories = categories.replace(
@@ -65,10 +65,10 @@ pub fn promote_rule(rule_name: &str, new_group: &str) {
         std::fs::write(categories_path, categories).unwrap();
 
         let old_test_path = current_dir
-            .join("crates/rome_js_analyze/tests/specs/nursery")
+            .join("crates/tuna_js_analyze/tests/specs/nursery")
             .join(rule_name);
         let new_test_path = current_dir
-            .join("crates/rome_js_analyze/tests/specs")
+            .join("crates/tuna_js_analyze/tests/specs")
             .join(new_group)
             .join(rule_name);
 
@@ -76,7 +76,7 @@ pub fn promote_rule(rule_name: &str, new_group: &str) {
         move_dir(
             old_test_path.display().to_string(),
             current_dir
-                .join("crates/rome_js_analyze/tests/specs")
+                .join("crates/tuna_js_analyze/tests/specs")
                 .join(new_group)
                 .display()
                 .to_string(),

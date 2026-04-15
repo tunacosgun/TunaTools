@@ -4,18 +4,18 @@
 #![allow(dead_code)]
 
 use libfuzzer_sys::Corpus;
-use rome_analyze::{AnalysisFilter, AnalyzerOptions, ControlFlow, RuleFilter};
-use rome_diagnostics::Diagnostic;
-use rome_formatter::format_node;
-use rome_js_analyze::analyze;
-use rome_js_formatter::context::JsFormatOptions;
-use rome_js_formatter::JsFormatLanguage;
-use rome_js_parser::parse;
-use rome_js_syntax::JsFileSource;
-use rome_json_formatter::context::JsonFormatOptions;
-use rome_json_formatter::JsonFormatLanguage;
-use rome_json_parser::parse_json;
-use rome_service::Rules;
+use tuna_analyze::{AnalysisFilter, AnalyzerOptions, ControlFlow, RuleFilter};
+use tuna_diagnostics::Diagnostic;
+use tuna_formatter::format_node;
+use tuna_js_analyze::analyze;
+use tuna_js_formatter::context::JsFormatOptions;
+use tuna_js_formatter::JsFormatLanguage;
+use tuna_js_parser::parse;
+use tuna_js_syntax::JsFileSource;
+use tuna_json_formatter::context::JsonFormatOptions;
+use tuna_json_formatter::JsonFormatLanguage;
+use tuna_json_parser::parse_json;
+use tuna_service::Rules;
 use similar::TextDiff;
 use std::fmt::{Display, Formatter};
 

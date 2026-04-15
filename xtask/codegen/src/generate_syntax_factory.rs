@@ -8,17 +8,17 @@ use xtask::Result;
 pub fn generate_syntax_factory(ast: &AstSrc, language_kind: LanguageKind) -> Result<String> {
     let (syntax_crate, syntax_kind, factory_kind) = match language_kind {
         LanguageKind::Js => (
-            quote! { rome_js_syntax },
+            quote! { tuna_js_syntax },
             quote! { JsSyntaxKind },
             quote! { JsSyntaxFactory },
         ),
         LanguageKind::Css => (
-            quote! { rome_css_syntax },
+            quote! { tuna_css_syntax },
             quote! { CssSyntaxKind },
             quote! { CssSyntaxFactory },
         ),
         LanguageKind::Json => (
-            quote! { rome_json_syntax },
+            quote! { tuna_json_syntax },
             quote! { JsonSyntaxKind },
             quote! { JsonSyntaxFactory },
         ),
@@ -107,7 +107,7 @@ pub fn generate_syntax_factory(ast: &AstSrc, language_kind: LanguageKind) -> Res
 
     let output = quote! {
         use #syntax_crate::{*, #syntax_kind, #syntax_kind::*, T};
-        use rome_rowan::{AstNode, ParsedChildren, RawNodeSlots, RawSyntaxNode, SyntaxFactory, SyntaxKind};
+        use tuna_rowan::{AstNode, ParsedChildren, RawNodeSlots, RawSyntaxNode, SyntaxFactory, SyntaxKind};
 
         #[derive(Debug)]
         pub struct #factory_kind;
